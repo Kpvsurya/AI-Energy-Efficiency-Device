@@ -1,0 +1,19 @@
+import pandas as pd
+import random
+from datetime import datetime, timedelta
+
+def generate_energy_data(days=30):
+    data = []
+    start_time = datetime.now() - timedelta(days=days)
+    
+    for i in range(days * 24):
+        timestamp = start_time + timedelta(hours=i)
+        energy_usage = round(random.uniform(10, 50), 2)  # Simulate energy usage in kWh
+        data.append([timestamp, energy_usage])
+    
+    df = pd.DataFrame(data, columns=["Timestamp", "Energy_Usage"])
+    df.to_csv("data/energy_usage.csv", index=False)
+    print("Energy data generated successfully.")
+
+if __name__ == "__main__":
+    generate_energy_data()
